@@ -1,0 +1,42 @@
+#define SENSOR 1 //на этом пине сенсор
+#define LED_STRIP 2 // на этом пине лента
+int Delay = 5000; //задержка в милисекундах
+bool lightOn = false; //флаг указывающий включен ли свет, начальное положение - выключен
+bool motionDetect; // флаг указывающий сработал ли сенсор
+
+void setup() //настройка входов-выходов
+{
+	pinMode(LED_STRIP, OUTPUT); //устанавливаем что это выход
+	pinMode(SENSOR, INPUT); //устанавливаем что это вход
+}
+
+void loop ()
+{
+
+ motionDetect = digitalRead (sensor); //читаем что на входе-сенсоре и присваиваем флагу, да или нет
+ 
+ // если движение есть и свет выключен то плавно зажигаем
+ if (motionDetect = true && lightOn = false ) {
+	 	for (int fadeValue = 0 ; fadeValue <= 255; fadeValue += 5) {
+        analogWrite(LED_STRIP, fadeValue);
+        delay(30); //задержка для плавности включения
+}
+}
+		
+if (fadeValue =	255) {
+	bool lightOn = true; //если яркость набрана максимальная взводим флаг что свет зажжен
+	delay(Delay); // и выдерживаем задержку	когда свет просто горит	не реагируя на датчик
+}
+ 
+ //проверяем снова есть ли движение и включен ли свет, если движения нет, а свет горит, то плавно гасим
+ if (motionDetect = false && lightOn = true ){
+		for (int fadeValue = 255 ; fadeValue >= 0; fadeValue -= 5) {
+		analogWrite(LED_STRIP, fadeValue);
+		delay(30); //задержка для плавности включения
+}
+}
+if (fadeValue <=0) {	
+	bool lightOn = false; // отмечаем флаг что свет погас
+}
+
+}
